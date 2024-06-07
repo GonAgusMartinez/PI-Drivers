@@ -1,10 +1,17 @@
-const axios = require("axios");
-const server = require("./src/server");
-const { conn } = require('./src/db.js');
-const PORT = 3001;
+const express = require("express");
+const morgan = require("morgan");
+const cors = require("cors");
+const sequelize = require("../server/src/db");
+const server = express();
 
-conn.sync({ force: true }).then(() => {
-server.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`);
-})
-}).catch(error => console.error(error))
+server.use(morgan("dev"));
+server.use(express.json());
+server.use(cors());
+
+sequelize.sync({ force: true }).then(() => {
+  server.listen(3001, () => {
+    console.log('Server listening on port 3001');
+  });
+});
+
+module.exports = server;

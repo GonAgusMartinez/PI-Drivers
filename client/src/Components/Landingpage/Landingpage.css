@@ -1,0 +1,31 @@
+.landing-page {
+    background-image: url('Drivers.png'); 
+    background-size: cover; 
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .landing-content {
+    text-align: center;
+    color: #FFFFFF;
+    text-shadow: 10px 10px 50px #FFFFFF;
+  }
+  
+  .enter-button {
+    padding: 10px 20px;
+    background-color: #990800;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease; 
+  }
+  
+  .enter-button:hover {
+    background-color: #2312E6; 
+    color: #FFFFFF; 
+  }

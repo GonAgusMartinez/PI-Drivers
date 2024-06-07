@@ -1,0 +1,33 @@
+.detail-page {
+    background-color: #FFFFFF;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .driver-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .driver-image {
+    width: 300px;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 10px;
+  }
+  
+  .driver-info {
+    text-align: left;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .driver-info p {
+    font-size: 18px;
+    margin: 5px 0;
+  }
+  
+  .driver-info strong {
+    color: #990800;
+  }

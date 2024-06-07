@@ -1,0 +1,56 @@
+.info-container {
+  background-color: #F77300; /* Cambiamos a celeste */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Para que ocupe toda la altura de la ventana */
+}
+
+.page-title {
+  background-color: #000000; /* Cambiamos a celeste */
+}
+
+.fotito-image {
+  max-width: 200px; /* Ajustamos el tamaño de la foto */
+  margin-bottom: 20px; /* Agregamos espacio inferior */
+}
+
+.back-button {
+  padding: 10px 20px;
+  background-color: #990800; /* Rosa */
+  color: #FFFFFF; /* Blanco */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin-bottom: 20px; /* Agregamos espacio inferior */
+  text-decoration: none; /* Agregamos para quitar la subraya */
+  display: inline-block; /* Para que funcione el margin-bottom */
+}
+
+.back-button:hover {
+  background-color: #2312E6; /* Marrón */
+}
+
+.content-container {
+  margin-bottom: 20px; /* Agregamos espacio inferior */
+}
+
+.page-description {
+  color: #000000; /* Color de texto negro */
+}
+
+.toggle-button {
+  padding: 10px 20px;
+  background-color: #990800; /* Rosa */
+  color: #FFFFFF; /* Blanco */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.toggle-button:hover {
+  background-color: #2312E6; /* Marrón */
+}
