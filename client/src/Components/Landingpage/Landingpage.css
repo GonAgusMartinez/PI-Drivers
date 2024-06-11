@@ -1,5 +1,5 @@
 .landing-page {
-    background-image: url('Drivers.png'); 
+    background-image: url('Husky.png'); 
     background-size: cover; 
     background-position: center;
     height: 100vh;
@@ -11,12 +11,12 @@
   .landing-content {
     text-align: center;
     color: #FFFFFF;
-    text-shadow: 10px 10px 50px #FFFFFF;
+    text-shadow: 10px 10px 50px #000000;
   }
   
   .enter-button {
     padding: 10px 20px;
-    background-color: #990800;
+    background-color: #FF6CB8;
     color: #FFFFFF;
     border: none;
     border-radius: 5px;
@@ -26,6 +26,6 @@
   }
   
   .enter-button:hover {
-    background-color: #2312E6; 
-    color: #FFFFFF; 
+    background-color: #D66541; 
+    color: #000000; 
   }

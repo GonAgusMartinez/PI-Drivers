@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../Searchbar/Searchbar.css';
+import './Searchbar.css';
 
 const SearchBar = ({ onSearch, onFilter, onSort }) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -39,7 +39,7 @@ const SearchBar = ({ onSearch, onFilter, onSort }) => {
           value={temperamentFilter}
           onChange={handleTemperamentFilterChange}
         >
-          <option value="">Teams</option>
+          <option value="">Temperament</option>
           
         </select>
         <select
@@ -47,8 +47,8 @@ const SearchBar = ({ onSearch, onFilter, onSort }) => {
           value={originFilter}
           onChange={handleOriginFilterChange}
         >
-          <option value="standar">Standar</option>
-          <option value="created">Created</option>
+          <option value="api">Api</option>
+          <option value="database">Database</option>
         </select>
         <select
           className="filter-button"
@@ -56,7 +56,7 @@ const SearchBar = ({ onSearch, onFilter, onSort }) => {
           onChange={handleSortChange}
         >
           <option value="alphabetical">Alphabetical</option>
-          <option value="birthdate">Birthdate</option>
+          <option value="weight">Weight</option>
         </select>
       </div>
     </div>

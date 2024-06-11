@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
-import '../Info/Info.css';
-import Fotito from '../Info/Fotito.png';
+import './Info.css';
+import Fotito from './Fotito.png';
 
 const Info = () => {
   const [showMore, setShowMore] = useState(false);
@@ -12,9 +12,9 @@ const Info = () => {
 
   return (
     <div>
-      <div className="info-container" style={{ backgroundColor: '#00DB73' }}>
+      <div className="info-container" style={{ backgroundColor: '#5BE6E1' }}>
         <div className="content-container">
-          <h1 className="page-title">DriversCup</h1>
+          <h1 className="page-title">WoofWiki</h1>
           {showMore ? (
             <div className="personal-story">
               <p>
@@ -31,10 +31,10 @@ const Info = () => {
             <div className="page-description">
               <p>
                 Main Features:
-                Drivers Search: Use our search bar to find your favorite driver. Filter by name, team, and more.
-                Detailed Information: Access detailed information about each driver, including details such as name and birthdate.
-                Drivers Creation: You can add your own breeds to our database!
-                Our mission is to provide a place where the drive community can connect, explore new knowledge, and share their thoughts.
+                Dog Breed Search: Use our search bar to find your favorite dogs. Filter by name, breed, and more.
+                Detailed Information: Access detailed information about each dog, including details such as weight and height.
+                Dog Breed Creation: You can add your own breeds to our database!
+                Our mission is to provide a place where the breeding community can connect, explore new knowledge, and share their thoughts.
                 So, what are you waiting for? Start your journey to explore this incredible world now! Feel free to join our community.
                 Note: This page is under constant development, and we're excited to receive your feedback and suggestions to improve your experience.
               </p>

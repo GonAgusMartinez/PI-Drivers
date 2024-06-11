@@ -1,76 +1,56 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import SearchBar from '../Searchbar/Searchbar';
-import Card from '../Cards/Cards';
+import Cards from '../Cards/Cards';
 import Paginado from '../Paginado/Paginado';
 import Loader from '../Loader/Loader';
 import '../Homepage/Homepage.css';
-import { useDispatch } from 'react-redux';
 
 const Homepage = () => {
-  const [drivers, setDrivers] = useState([]);
+  const [dogs, setDogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [driversPerPage] = useState(9);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filteredDrivers, setFilteredDrivers] = useState([]);
-
-  const dispatch = useDispatch();
+  const [dogsPerPage] = useState(8);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/drivers');
-        dispatch(setDrivers(response.data));
-        setFilteredDrivers(response.data);
-        setLoading(false);
+        const response = await axios.get('http://localhost:3001/dogs');
+        setDogs(response.data);
+        setLoading(false); 
       } catch (error) {
-        console.error('Error fetching drivers:', error);
+        console.error('Error fetching dogs:', error);
       }
     };
   
     fetchData();
-  }, [dispatch]);
+  }, []);
 
-  useEffect(() => {
-    const filtered = drivers.filter(driver => 
-      driver.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setFilteredDrivers(filtered);
-  }, [searchTerm, drivers]);
-
-  const indexOfLastDriver = currentPage * driversPerPage;
-  const indexOfFirstDriver = indexOfLastDriver - driversPerPage;
-  const currentDrivers = filteredDrivers.slice(indexOfFirstDriver, indexOfLastDriver);
+  const indexOfLastDog = currentPage * dogsPerPage;
+  const indexOfFirstDog = indexOfLastDog - dogsPerPage;
+  const currentDogs = dogs.slice(indexOfFirstDog, indexOfLastDog);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div className="homepage-container">
-      <h1 className="homepage-title">DriversCup</h1>
+      <h1 className="homepage-title">WoofWiki</h1>
       <div className="title-space"></div>
-      <SearchBar onSearch={setSearchTerm} />
+      <SearchBar />
       <div className="searchbar-space"></div>
       {loading ? (
         <Loader />
       ) : (
         <>
           <div className="cards-container">
-            {currentDrivers.map(driver => (
-              <Card
-                key={driver.id}
-                id={driver.id}
-                name={driver.name}
-                image={driver.image}
-                teams={driver.teams}
-              />
-            ))}
+            <Cards dogs={currentDogs} />
           </div>
           <div className="cards-paginado-space"></div>
           <div className="paginado-container">
             <Paginado
-              driversPerPage={driversPerPage}
-              totalDrivers={filteredDrivers.length}
+              dogsPerPage={dogsPerPage}
+              totalDogs={dogs.length}
               paginate={paginate}
               currentPage={currentPage}
             />

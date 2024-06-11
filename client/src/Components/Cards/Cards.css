@@ -1,0 +1,53 @@
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* Espacio entre las cards */
+}
+
+.card-container {
+  width: 45%; /* Ancho de la card */
+  height: 1100px; /* Aumentar la altura de la card */
+  margin-bottom: 20px; /* Margen inferior entre las cards */
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-image {
+  width: 100%; /* Ajustar la anchura al 100% del contenedor */
+  height: 80%; /* Ajustar la altura al 100% del contenedor */
+  object-fit: cover; /* Escalar y recortar la imagen para que se ajuste al contenedor */
+}
+
+.card-content {
+  padding: 20px;
+  background-color: #FFFFFF;
+}
+
+.card-name {
+  margin: 0;
+  font-size: 20px;
+  color: #000000;
+}
+
+.card-details {
+  margin: 10px 0;
+  font-size: 16px;
+  color: #808080;
+}
+
+.card-link {
+  display: block;
+  text-decoration: none;
+  color: #FFFFFF;
+  background-color: #FF6CB8;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-align: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin-top: 10px;
+}
+
+.card-link:hover {
+  background-color: #D66541;
+}

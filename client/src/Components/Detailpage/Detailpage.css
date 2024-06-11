@@ -1,33 +1,35 @@
 .detail-page {
-    background-color: #FFFFFF;
-    padding: 20px;
-    text-align: center;
-  }
-  
-  .driver-details {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .driver-image {
-    width: 300px;
-    height: auto;
-    margin-bottom: 20px;
-    border-radius: 10px;
-  }
-  
-  .driver-info {
-    text-align: left;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-  
-  .driver-info p {
-    font-size: 18px;
-    margin: 5px 0;
-  }
-  
-  .driver-info strong {
-    color: #990800;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px; /* Espacio desde arriba */
+}
+
+.detail-page img {
+  width: 300px; /* Ancho deseado de la imagen */
+  height: auto; /* Altura automática */
+  margin-bottom: 20px; /* Espacio debajo de la imagen */
+}
+
+.detail-page h1 {
+  font-size: 50px; /* Tamaño del título */
+}
+
+.button-link {
+  text-decoration: none;
+  color: #FFFFFF;
+  background-color: #FF6CB8;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin-top: 20px; /* Espacio desde arriba */
+}
+
+.button-link:hover {
+  background-color: #D66541;
+  color: #000000;
+}

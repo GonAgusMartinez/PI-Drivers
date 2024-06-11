@@ -1,80 +1,80 @@
 .formpage-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background-color: #F77300; 
-    min-height: 100vh; 
-  }
-  
-  .left-content {
-    text-align: center;
-  }
-  
-  .max-image {
-    max-width: 100%;
-    height: auto;
-  }
-  
-  .back-button {
-    padding: 10px 20px;
-    background-color: #990800; /* Rosa */
-    color: #FFFFFF; /* Blanco */
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    margin-top: 20px;
-    text-decoration: none; /* Agregamos para quitar la subraya */
-    display: inline-block; /* Para que funcione el margin-top */
-  }
-  
-  .back-button:hover {
-    background-color: #2312E6; /* Marrón */
-  }
-  
-  .right-content {
-    flex: 1;
-    padding-left: 20px;
-    color: #000000; /* Cambiamos el color del texto a negro */
-  }
-  
-  .form-title {
-    font-size: 24px;
-    color: #000000; /* Rosa */
-  }
-  
-  .form-label {
-    display: block;
-    margin-bottom: 10px;
-    color: #000000; /* Rosa */
-  }
-  
-  .form-text {
-    padding: 10px;
-    border: 1px solid #000000; /* Rosa */
-    border-radius: 5px;
-    width: 100%;
-    box-sizing: border-box; /* Asegura que el padding no afecte al ancho del input */
-    color: #000000; /* Cambiamos el color del texto a negro */
-  }
-  
-  .create-button {
-    padding: 10px 20px;
-    background-color: #990800; /* Rosa */
-    color: #FFFFFF; /* Blanco */
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    margin-top: 20px;
-  }
-  
-  .create-button:hover {
-    background-color: #2312E6; /* Marrón */
-  }
-  
-  .create-button.disabled {
-    background-color: #808080; /* Gris */
-    cursor: not-allowed;
-  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #D66541; 
+  min-height: 100vh; 
+}
+
+.left-content {
+  text-align: center;
+}
+
+.dog-image {
+  max-width: 100%;
+  height: auto;
+}
+
+.back-button {
+  padding: 10px 20px;
+  background-color: #FF6CB8; /* Rosa */
+  color: #FFFFFF; /* Blanco */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin-top: 20px;
+  text-decoration: none; /* Agregamos para quitar la subraya */
+  display: inline-block; /* Para que funcione el margin-top */
+}
+
+.back-button:hover {
+  background-color: #D66541; /* Marrón */
+}
+
+.right-content {
+  flex: 1;
+  padding-left: 20px;
+  color: #000000; /* Cambiamos el color del texto a negro */
+}
+
+.form-title {
+  font-size: 24px;
+  color: #000000; /* Rosa */
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 10px;
+  color: #000000; /* Rosa */
+}
+
+.form-text {
+  padding: 10px;
+  border: 1px solid #000000; /* Rosa */
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box; /* Asegura que el padding no afecte al ancho del input */
+  color: #000000; /* Cambiamos el color del texto a negro */
+}
+
+.create-button {
+  padding: 10px 20px;
+  background-color: #FF6CB8; /* Rosa */
+  color: #FFFFFF; /* Blanco */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin-top: 20px;
+}
+
+.create-button:hover {
+  background-color: #D66541; /* Marrón */
+}
+
+.create-button.disabled {
+  background-color: #808080; /* Gris */
+  cursor: not-allowed;
+}

@@ -16,7 +16,7 @@
 }
 
 .filter-button {
-  background-color: #990800;
+  background-color: #FF6CB8;
   color: #FFFFFF;
   border: none;
   cursor: pointer;
@@ -26,6 +26,6 @@
 }
 
 .filter-button:hover {
-  background-color: #2312E6;
-  color: #FFFFFF;
+  background-color: #D66541;
+  color: #000000;
 }

@@ -1,5 +1,5 @@
 .info-container {
-  background-color: #F77300; /* Cambiamos a celeste */
+  background-color: #5BE6E1; /* Cambiamos a celeste */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -8,7 +8,7 @@
 }
 
 .page-title {
-  background-color: #000000; /* Cambiamos a celeste */
+  background-color: #5BE6E1; /* Cambiamos a celeste */
 }
 
 .fotito-image {
@@ -18,7 +18,7 @@
 
 .back-button {
   padding: 10px 20px;
-  background-color: #990800; /* Rosa */
+  background-color: #FF6CB8; /* Rosa */
   color: #FFFFFF; /* Blanco */
   border: none;
   border-radius: 5px;
@@ -30,7 +30,7 @@
 }
 
 .back-button:hover {
-  background-color: #2312E6; /* Marrón */
+  background-color: #D66541; /* Marrón */
 }
 
 .content-container {
@@ -43,7 +43,7 @@
 
 .toggle-button {
   padding: 10px 20px;
-  background-color: #990800; /* Rosa */
+  background-color: #FF6CB8; /* Rosa */
   color: #FFFFFF; /* Blanco */
   border: none;
   border-radius: 5px;
@@ -52,5 +52,5 @@
 }
 
 .toggle-button:hover {
-  background-color: #2312E6; /* Marrón */
+  background-color: #D66541; /* Marrón */
 }
