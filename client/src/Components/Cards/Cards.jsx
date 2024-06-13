@@ -1,28 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Cards.css'; 
+import '../Cards/Cards.css';
+import DefaultImage from '../Cards/Autito.jpg';
 
+const Card = ({ id, name, image, teams }) => {
+  const fullName = `${name.forename} ${name.surname}`;
+  const teamsString = Array.isArray(teams) ? teams.join(', ') : teams;
 
-const Cards = ({ dogs }) => {
   return (
-    <div className="cards-container">
-      {dogs.map((dog) => (
-        <div key={dog.id} className="card-container">
-          <img src={dog.image && dog.image.url} alt={dog.name} className="card-image" />
-          <div className="card-content">
-            <h2 className="card-name">{dog.name}</h2>
-            <p className="card-details">
-              <strong>Temperaments:</strong> {dog.temperament}<br />
-              <strong>Weight:</strong> {dog.weight.metric} (metric), {dog.weight.imperial} (imperial)<br />
-              <strong>Life Span:</strong> {dog.life_span}<br />
-              <strong>Height:</strong> {dog.height.metric} (metric), {dog.height.imperial} (imperial)<br />
-            </p>
-            <Link to={`/dogs/${dog.id}`} className="card-link">View Details</Link>
-          </div>
-        </div>
-      ))}
+    <div className="card">
+      <img src={image.url ? image.url : DefaultImage} alt={fullName} className="card-image" />
+      <div className="card-content">
+        <h3 className="card-name">{fullName}</h3>
+        <p className="card-teams">Teams: {teamsString}</p>
+        <Link to={`/drivers/${id}`} className="enter-button">View Details</Link>
+      </div>
     </div>
   );
-}
+};
 
-export default Cards;
+export default Card;

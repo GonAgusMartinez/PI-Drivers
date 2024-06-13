@@ -1,14 +1,16 @@
 .info-container {
-  background-color: #5BE6E1; /* Cambiamos a celeste */
+  background-color: #F77300;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Para que ocupe toda la altura de la ventana */
+  height: 100vh;
+  text-align: center; /* Centrar texto */
 }
 
 .page-title {
-  background-color: #5BE6E1; /* Cambiamos a celeste */
+  font-size: 2rem; /* Tamaño del título */
+  margin-bottom: 20px; /* Espacio inferior del título */
 }
 
 .fotito-image {
@@ -18,7 +20,7 @@
 
 .back-button {
   padding: 10px 20px;
-  background-color: #FF6CB8; /* Rosa */
+  background-color: #990800; /* Rosa */
   color: #FFFFFF; /* Blanco */
   border: none;
   border-radius: 5px;
@@ -30,27 +32,33 @@
 }
 
 .back-button:hover {
-  background-color: #D66541; /* Marrón */
+  background-color: #2312E6; /* Marrón */
 }
 
 .content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centrar elementos horizontalmente */
   margin-bottom: 20px; /* Agregamos espacio inferior */
 }
 
-.page-description {
+.page-description, .personal-story {
   color: #000000; /* Color de texto negro */
+  max-width: 600px; /* Ancho máximo del texto */
+  text-align: center; /* Asegurar que el texto esté centrado */
 }
 
 .toggle-button {
   padding: 10px 20px;
-  background-color: #FF6CB8; /* Rosa */
+  background-color: #990800; /* Rosa */
   color: #FFFFFF; /* Blanco */
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease;
+  margin-top: 20px; /* Espacio superior del botón */
 }
 
 .toggle-button:hover {
-  background-color: #D66541; /* Marrón */
+  background-color: #2312E6; /* Marrón */
 }

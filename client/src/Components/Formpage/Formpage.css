@@ -3,7 +3,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  background-color: #D66541; 
+  background-color: #F77300; 
   min-height: 100vh; 
 }
 
@@ -11,70 +11,72 @@
   text-align: center;
 }
 
-.dog-image {
+.max-image {
   max-width: 100%;
   height: auto;
 }
 
 .back-button {
   padding: 10px 20px;
-  background-color: #FF6CB8; /* Rosa */
-  color: #FFFFFF; /* Blanco */
+  background-color: #990800;
+  color: #FFFFFF;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease;
   margin-top: 20px;
-  text-decoration: none; /* Agregamos para quitar la subraya */
-  display: inline-block; /* Para que funcione el margin-top */
+  text-decoration: none;
+  display: inline-block;
+  margin-left: 10px;
 }
 
 .back-button:hover {
-  background-color: #D66541; /* Marrón */
+  background-color: #2312E6;
 }
 
 .right-content {
   flex: 1;
   padding-left: 20px;
-  color: #000000; /* Cambiamos el color del texto a negro */
+  color: #000000;
 }
 
 .form-title {
   font-size: 24px;
-  color: #000000; /* Rosa */
+  color: #000000;
 }
 
 .form-label {
   display: block;
   margin-bottom: 10px;
-  color: #000000; /* Rosa */
+  color: #000000;
 }
 
 .form-text {
   padding: 10px;
-  border: 1px solid #000000; /* Rosa */
+  border: 1px solid #000000;
   border-radius: 5px;
   width: 100%;
-  box-sizing: border-box; /* Asegura que el padding no afecte al ancho del input */
-  color: #000000; /* Cambiamos el color del texto a negro */
+  box-sizing: border-box;
+  color: #000000;
 }
 
 .create-button {
   padding: 10px 20px;
-  background-color: #FF6CB8; /* Rosa */
-  color: #FFFFFF; /* Blanco */
+  background-color: #990800;
+  color: #FFFFFF;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease;
   margin-top: 20px;
+  margin-right: 10px;
 }
 
 .create-button:hover {
-  background-color: #D66541; /* Marrón */
+  background-color: #2312E6;
 }
 
 .create-button.disabled {
-  background-color: #808080; /* Gris */
+  background-color: #808080;
   cursor: not-allowed;
 }

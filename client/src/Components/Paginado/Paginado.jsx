@@ -1,10 +1,22 @@
 import React from 'react';
 import '../Paginado/Paginado.css';
 
-const Paginado = ({ dogsPerPage, totalDogs, paginate, currentPage }) => {
+const Paginado = ({ driversPerPage, totalDrivers, paginate, currentPage }) => {
   const pageNumbers = [];
+  const totalPages = Math.ceil(totalDrivers / driversPerPage);
 
-  for (let i = 1; i <= Math.ceil(totalDogs / dogsPerPage); i++) {
+  let lowerLimit = Math.max(1, currentPage - 5);
+  let upperLimit = Math.min(currentPage + 5, totalPages);
+
+  if (upperLimit - lowerLimit + 1 < 10) {
+    if (currentPage <= 5) {
+      upperLimit = Math.min(10, totalPages);
+    } else {
+      lowerLimit = Math.max(1, totalPages - 9);
+    }
+  }
+
+  for (let i = lowerLimit; i <= upperLimit; i++) {
     pageNumbers.push(i);
   }
 
@@ -16,9 +28,9 @@ const Paginado = ({ dogsPerPage, totalDogs, paginate, currentPage }) => {
           {number}
         </button>
       ))}
-      <button onClick={() => paginate(currentPage + 1)} disabled={currentPage === Math.ceil(totalDogs / dogsPerPage)}>Next</button>
+      <button onClick={() => paginate(currentPage + 1)} disabled={currentPage === totalPages}>Next</button>
     </div>
   );
 }
 
-export default Paginado
+export default Paginado;

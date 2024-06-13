@@ -1,6 +1,10 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
-import rootReducer from '../Reducer/Index'; 
+import driversReducer from '../Reducer/Index';
+
+const rootReducer = combineReducers({
+  drivers: driversReducer,
+});
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 

@@ -1,27 +1,21 @@
-.cards-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between; /* Espacio entre las cards */
-}
-
-.card-container {
-  width: 45%; /* Ancho de la card */
-  height: 1100px; /* Aumentar la altura de la card */
-  margin-bottom: 20px; /* Margen inferior entre las cards */
+.card {
+  width: 300px;
+  height: 280px; 
+  background-color: #FFFFFF;
   border-radius: 10px;
-  overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
 .card-image {
-  width: 100%; /* Ajustar la anchura al 100% del contenedor */
-  height: 80%; /* Ajustar la altura al 100% del contenedor */
-  object-fit: cover; /* Escalar y recortar la imagen para que se ajuste al contenedor */
+  width: 100%;
+  height: 40%; 
+  object-fit: cover;
 }
 
 .card-content {
+  height: 60%; 
   padding: 20px;
-  background-color: #FFFFFF;
 }
 
 .card-name {
@@ -30,24 +24,27 @@
   color: #000000;
 }
 
-.card-details {
+.card-teams {
   margin: 10px 0;
   font-size: 16px;
   color: #808080;
 }
 
-.card-link {
-  display: block;
-  text-decoration: none;
+.enter-button {
+  padding: 15px 30px;
+  background-color: #990800;
   color: #FFFFFF;
-  background-color: #FF6CB8;
-  padding: 10px 20px;
+  border: none;
   border-radius: 5px;
-  text-align: center;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  margin-top: 10px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease; 
+  text-decoration: none; /* Eliminar subrayado */
+  display: inline-block; /* Asegura que el margin-top funcione */
+  margin-top: 10px; /* Añadir margen superior para separar del texto "Teams" */
 }
 
-.card-link:hover {
-  background-color: #D66541;
+.enter-button:hover {
+  background-color: #2312E6; 
+  color: #FFFFFF; 
 }

@@ -1,56 +1,55 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import Loader from '../Loader/Loader'; 
-import './Detailpage.css';
+import '../Detailpage/Detailpage.css';
+import Loader from '../Loader/Loader';
+import { useDispatch } from 'react-redux';
 
 const DetailPage = () => {
   const { id } = useParams();
-  const [dog, setDog] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const fetchDogDetails = async () => {
+    const fetchDriver = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/dogs/${id}`);
-        setDog(response.data);
+        const response = await axios.get(`http://localhost:3001/drivers/${id}`);
+        dispatch(setDriverDetail(response.data));
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching dog details:', error);
-        setError('Error fetching dog details. Please try again later.');
+        console.error('Error fetching driver:', error);
         setLoading(false);
       }
     };
-
-    fetchDogDetails();
-  }, [id]);
+  
+    fetchDriver();
+  }, [dispatch, id]);
 
   if (loading) {
-    return <Loader />; 
+    return <Loader />;
   }
 
-  if (error) {
-    return <div>{error}</div>;
-  }
-
-  if (!dog) {
-    return <div>No dog found.</div>;
+  if (!driver) {
+    return <p>Driver not found</p>;
   }
 
   return (
     <div className="detail-page">
-      <h1>WoofWiki</h1>
-      <h2>Dog Details</h2>
-      <div>ID: {dog.id}</div>
-      <div>Name: {dog.name}</div>
-      <div>Height: {dog.height.metric} (metric), {dog.height.imperial} (imperial)</div>
-      <div>Weight: {dog.weight.metric} (metric), {dog.weight.imperial} (imperial)</div>
-      <div>Temperaments: {dog.temperament}</div>
-      <div>Life Span: {dog.life_span}</div>
-      <Link to="/home" className="button-link">Back</Link>
+      <h1>{`${driver.name.forename} ${driver.name.surname}`}</h1>
+      <div className="driver-details">
+        <img src={driver.image.url} alt={`${driver.name.forename} ${driver.name.surname}`} className="driver-image" />
+        <div className="driver-info">
+          <p><strong>ID:</strong> {driver.id}</p>
+          <p><strong>Name:</strong> {driver.name.forename} {driver.name.surname}</p>
+          <p><strong>Nationality:</strong> {driver.nationality}</p>
+          <p><strong>Date of Birth:</strong> {driver.dob}</p>
+          <p><strong>Teams:</strong> {driver.teams}</p>
+          <p><strong>Description:</strong> {driver.description}</p>
+        </div>
+      </div>
     </div>
   );
-}
+};
 
 export default DetailPage;

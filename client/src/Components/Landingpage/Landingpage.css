@@ -1,31 +1,58 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Asegúrate de que no haya márgenes ni rellenos en html y body */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Estilo para la página de aterrizaje */
 .landing-page {
-    background-image: url('Husky.png'); 
-    background-size: cover; 
-    background-position: center;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .landing-content {
-    text-align: center;
-    color: #FFFFFF;
-    text-shadow: 10px 10px 50px #000000;
-  }
-  
-  .enter-button {
-    padding: 10px 20px;
-    background-color: #FF6CB8;
-    color: #FFFFFF;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease; 
-  }
-  
-  .enter-button:hover {
-    background-color: #D66541; 
-    color: #000000; 
-  }
+  background-image: url('../Landingpage/Drivers.jpg'); 
+  background-size: cover; 
+  background-position: center;
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+  background-attachment: fixed; /* Fija la imagen de fondo */
+  height: 100vh;
+  width: 100vw; /* Asegura que ocupe todo el ancho de la ventana */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box; /* Incluye el relleno y borde en el tamaño del elemento */
+}
+
+.landing-content {
+  text-align: center;
+  color: #FFFFFF;
+  text-shadow: 10px 10px 50px #FFFFFF;
+}
+
+.landing-content h1 {
+  font-size: 3rem; /* Ajusta el tamaño del título */
+}
+
+.landing-content p {
+  font-size: 1.5rem; /* Ajusta el tamaño del párrafo */
+}
+
+.enter-button {
+  padding: 15px 30px; /* Aumenta el padding para hacer el botón más grande */
+  background-color: #990800;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.2rem; /* Ajusta el tamaño del texto del botón */
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease; 
+}
+
+.enter-button:hover {
+  background-color: #2312E6; 
+  color: #FFFFFF; 
+}

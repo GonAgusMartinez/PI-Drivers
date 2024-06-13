@@ -5,6 +5,7 @@ import Homepage from './Components/Homepage/Homepage';
 import Detailpage from './Components/Detailpage/Detailpage';
 import Formpage from './Components/Formpage/Formpage';
 import Landingpage from './Components/Landingpage/Landingpage';
+import Info from './Components/Info/Info';
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         <Route path="/home" element={<Homepage />} />
         <Route path="/detail/:id" element={<Detailpage />} />
         <Route path="/form" element={<Formpage />} />
+        <Route path="/Info" element={<Info />} />
       </Routes>
     </Router>
   );

@@ -7,7 +7,7 @@
   border-radius: 50%;
   width: 48px;
   height: 48px;
-  color: #FF95B8;
+  color: #6EFFFD;
 }
 
 .loader:before,
@@ -25,7 +25,7 @@
 }
 
 .loader:after {
-  color: #99472E;
+  color: #00DB73;
   transform: rotateY(70deg);
   animation-delay: .4s;
 }
