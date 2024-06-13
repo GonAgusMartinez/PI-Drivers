@@ -1,6 +1,7 @@
 const initialState = {
   drivers: [],
   driverDetail: null,
+  teams: [],
 };
 
 const driversReducer = (state = initialState, action) => {

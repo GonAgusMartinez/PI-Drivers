@@ -1,12 +1,10 @@
+import axios from 'axios';
+
 export const setDrivers = (drivers) => ({
   type: 'SET_DRIVERS',
   payload: drivers,
 });
 
-export const setDriverDetail = (driverDetail) => ({
-  type: 'SET_DRIVER_DETAIL',
-  payload: driverDetail,
-});
 
 export const fetchDrivers = () => async (dispatch) => {
   try {
@@ -18,13 +16,17 @@ export const fetchDrivers = () => async (dispatch) => {
   }
 };
 
+export const setDriverDetail = (driverDetail) => ({
+  type: 'SET_DRIVER_DETAIL',
+  payload: driverDetail,
+});
+
 export const fetchDriverDetail = (driverId) => async (dispatch) => {
   try {
-    const response = await fetch(`http://localhost:5000/drivers/${driverId}`);
-    const data = await response.json();
-    dispatch(setDriverDetail(data)); 
+    const response = await axios.get(`http://localhost:5000/drivers/${driverId}`);
+    dispatch(setDriverDetail(response.data));
   } catch (error) {
-    console.error('Error fetching driver detail:', error);
+    console.error('Error fetching driver:', error);
   }
 };
 
