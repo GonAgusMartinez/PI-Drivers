@@ -1,9 +1,9 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
-import driversReducer from '../Reducer/Index';
+import driverReducer from '../reducer/Index';
 
 const rootReducer = combineReducers({
-  drivers: driversReducer,
+  driverState: driverReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(thunk));

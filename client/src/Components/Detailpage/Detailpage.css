@@ -1,33 +1,50 @@
 .detail-page {
-    background-color: #FFFFFF;
-    padding: 20px;
-    text-align: center;
-  }
-  
-  .driver-details {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .driver-image {
-    width: 300px;
-    height: auto;
-    margin-bottom: 20px;
-    border-radius: 10px;
-  }
-  
-  .driver-info {
-    text-align: left;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-  
-  .driver-info p {
-    font-size: 18px;
-    margin: 5px 0;
-  }
-  
-  .driver-info strong {
-    color: #990800;
-  }
+  display: flex;
+  flex-direction: row; /* Asegura que el contenido y la barra lateral se distribuyan en fila */
+  max-width: 1200px; /* Ancho máximo para limitar el contenido */
+  margin: 0 auto; /* Centra el contenido horizontalmente */
+}
+
+.content {
+  flex: 1; /* El contenido principal ocupa el espacio restante */
+}
+
+.driver-details {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: row; /* Asegura que la imagen y la información del conductor estén en fila */
+}
+
+.driver-image {
+  width: 300px;
+  height: auto;
+  margin-right: 20px;
+  border-radius: 10px;
+}
+
+.driver-info {
+  flex: 1; /* La información del conductor ocupa todo el espacio disponible */
+}
+
+.driver-info p {
+  margin: 5px 0;
+}
+
+
+/* Estilos para el botón Back */
+.back-button {
+  padding: 10px 20px;
+  background-color: #990800;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin-top: 20px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.back-button:hover {
+  background-color: #2312E6;
+}
