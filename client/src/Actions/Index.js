@@ -1,16 +1,14 @@
 import axios from 'axios';
 
-// Acción para establecer la lista de conductores
 export const setDrivers = (drivers) => ({
   type: 'SET_DRIVERS',
   payload: drivers,
 });
 
-// Acción para obtener la lista de conductores
 export const fetchDrivers = () => async (dispatch) => {
   try {
     const response = await axios.get('http://localhost:5000/drivers');
-    dispatch(setDrivers(response.data)); 
+    dispatch(setDrivers(response.data));
   } catch (error) {
     console.error('Error fetching drivers:', error);
   }
@@ -45,5 +43,15 @@ export const fetchTeams = () => async (dispatch) => {
     dispatch(setTeams(response.data));
   } catch (error) {
     console.error('Error fetching teams:', error);
+  }
+};
+
+// Acción para crear un nuevo conductor
+export const postDriver = (driverData) => async (dispatch) => {
+  try {
+    const response = await axios.post('http://localhost:5000/drivers', driverData);
+    dispatch(fetchDrivers()); 
+  } catch (error) {
+    console.error('Error posting driver:', error);
   }
 };

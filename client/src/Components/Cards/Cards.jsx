@@ -4,12 +4,24 @@ import '../Cards/Cards.css';
 import DefaultImage from '../Cards/Autito.jpg';
 
 const Card = ({ id, name, image, teams }) => {
-  const fullName = `${name.forename} ${name.surname}`;
+  if (!name || !teams) {
+    return null;
+  }
+
+  let fullName;
+  if (name.forename && name.surname) {
+    fullName = `${name.forename} ${name.surname}`;
+  } else {
+    fullName = `${name}`;
+  }
+
   const teamsString = Array.isArray(teams) ? teams.join(', ') : teams;
+
+  let imageUrl = image && image.url ? image.url : DefaultImage;
 
   return (
     <div className="card">
-      <img src={image.url ? image.url : DefaultImage} alt={fullName} className="card-image" />
+      <img src={imageUrl} alt={fullName} className="card-image" />
       <div className="card-content">
         <h3 className="card-name">{fullName}</h3>
         <p className="card-teams">Teams: {teamsString}</p>

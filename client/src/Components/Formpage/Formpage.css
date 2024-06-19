@@ -1,14 +1,24 @@
 .formpage-container {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start; 
   padding: 20px;
-  background-color: #F77300; 
-  min-height: 100vh; 
+  background-color: #f77300;
+  min-height: 100vh;
+  overflow-y: auto; 
 }
 
 .left-content {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
 }
 
 .max-image {
@@ -69,7 +79,9 @@
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease;
   margin-top: 20px;
-  margin-right: 10px;
+  text-decoration: none;
+  display: inline-block;
+  margin-left: 10px;
 }
 
 .create-button:hover {

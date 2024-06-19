@@ -1,141 +1,248 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-import './Formpage.css';
-import MaxImage from './Maxverstappen.png';
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { postDriver } from "../../Actions/Index";
+import validation from "./validation";
+import "./formpage.css";
+import Maxverstappen from "./Maxverstappen.png";
 
-const FormPage = () => {
+const teamOptions = [
+  "Red Bull",
+  "Mercedes",
+  "Ferrari",
+  "McLaren",
+  "Aston Martin",
+  "Alphine",
+  "Williams Stake",
+  "Haas",
+];
+
+const Formpage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    nationality: '',
-    image: '',
-    dob: '',
-    description: '',
+  useEffect(() => {
+    // No se necesita fetchTeams() si ya tenemos las opciones de equipo predefinidas
+  }, []);
+
+  const [driverData, setDriverData] = useState({
+    forename: "",
+    surname: "",
+    nationality: "",
+    dob: "",
+    description: "",
+    image: "",
     teams: [],
   });
 
-  const [teams, setTeams] = useState([]);
-
-  useEffect(() => {
-    const fetchTeams = async () => {
-      try {
-        const response = await axios.get('http://localhost:5000/drivers');
-        const data = response.data;
-
-        // Utilizar un Set para equipos únicos
-        const uniqueTeamsSet = new Set();
-        data.forEach(driver => {
-          if (driver.teams && typeof driver.teams === 'string') {
-            // Dividir la cadena de equipos por comas y trim para eliminar espacios en blanco adicionales
-            const teamsArray = driver.teams.split(',').map(team => team.trim());
-            teamsArray.forEach(team => uniqueTeamsSet.add(team));
-          } else {
-            console.warn(`Driver ${driver.id} does not have valid teams data.`);
-          }
-        });
-
-        // Convertir Set a un array y ordenar alfabéticamente
-        const uniqueTeamsArray = Array.from(uniqueTeamsSet).sort();
-
-        // Actualizar el estado con los equipos únicos
-        setTeams(uniqueTeamsArray);
-      } catch (error) {
-        console.error('Error fetching teams:', error);
-      }
-    };
-
-    fetchTeams();
-  }, []);
+  const [errors, setErrors] = useState({
+    forename: "",
+    surname: "",
+    nationality: "",
+    dob: "",
+    description: "",
+    image: "",
+    teams: "",
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+
+    if (name === "teams") {
+      if (value === "Escuderías") {
+        return;
+      }
+
+      if (!driverData.teams.includes(value) && driverData.teams.length < 2) {
+        setDriverData((prevState) => ({
+          ...prevState,
+          teams: [...prevState.teams, value],
+        }));
+        setErrors(validation({ ...driverData, teams: [...driverData.teams, value] }));
+      }
+    } else {
+      setDriverData({
+        ...driverData,
+        [name]: value,
+      });
+      setErrors(validation({ ...driverData, [name]: value }));
+    }
   };
 
-  const handleSubmit = (e) => {
+  const handleRemove = (team) => (e) => {
     e.preventDefault();
-    console.log(formData);
-    // Aquí podrías enviar los datos al servidor o realizar alguna acción adicional.
+    setDriverData((prevState) => ({
+      ...prevState,
+      teams: prevState.teams.filter((escuderia) => escuderia !== team),
+    }));
+    setErrors(validation({ ...driverData, teams: driverData.teams.filter((escuderia) => escuderia !== team) }));
+  };
+
+  const handleDisable = () => {
+    let hasErrors = false;
+    for (let err in errors) {
+      if (errors[err] !== "") {
+        hasErrors = true;
+        break;
+      }
+    }
+    return hasErrors;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Validate all fields before submitting
+    const formErrors = validation(driverData);
+    setErrors(formErrors);
+
+    // Check if there are any errors
+    const hasErrors = Object.keys(formErrors).some((key) => formErrors[key] !== "");
+    if (hasErrors) {
+      alert("Please fill out the form correctly");
+      return;
+    }
+
+    // Form data is valid, proceed to submit
+    const teamsAsString = driverData.teams.join(", ");
+    const formWithTeamsAsString = {
+      ...driverData,
+      teams: teamsAsString,
+    };
+
+    try {
+      await dispatch(postDriver(formWithTeamsAsString));
+      alert("Driver created successfully");
+      navigate("/home");
+    } catch (error) {
+      alert("Error creating driver. Please try again.");
+      console.error("Error:", error);
+    }
   };
 
   return (
     <div className="formpage-container">
       <div className="left-content">
-        <img src={MaxImage} alt="Max Verstappen" className="max-image" />
+        <h2 className="form-title">Create Driver</h2>
+        <img src={Maxverstappen} alt="Driver" className="max-image" />
+        <div className="buttons-container">
+          <button className="back-button" onClick={() => navigate("/home")}>
+            Back
+          </button>
+          <button
+            type="submit"
+            className={`create-button ${handleDisable() ? "disabled" : ""}`}
+            disabled={handleDisable()}
+            onClick={handleSubmit}
+          >
+            Create
+          </button>
+        </div>
       </div>
       <div className="right-content">
-        <h2 className="form-title">Create New Driver</h2>
-        <form onSubmit={handleSubmit}>
-          <label className="form-label">First Name:</label>
-          <input
-            type="text"
-            className="form-text"
-            name="firstName"
-            value={formData.firstName}
-            onChange={handleChange}
-          />
-          <label className="form-label">Last Name:</label>
-          <input
-            type="text"
-            className="form-text"
-            name="lastName"
-            value={formData.lastName}
-            onChange={handleChange}
-          />
-          <label className="form-label">Nationality:</label>
-          <input
-            type="text"
-            className="form-text"
-            name="nationality"
-            value={formData.nationality}
-            onChange={handleChange}
-          />
-          <label className="form-label">Image:</label>
-          <input
-            type="text"
-            className="form-text"
-            name="image"
-            value={formData.image}
-            onChange={handleChange}
-          />
-          <label className="form-label">Date of Birth:</label>
-          <input
-            type="date"
-            className="form-text"
-            name="dob"
-            value={formData.dob}
-            onChange={handleChange}
-          />
-          <label className="form-label">Description:</label>
-          <textarea
-            className="form-text"
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-          ></textarea>
-          <label className="form-label">Teams:</label>
-          <select
-            multiple
-            className="form-text"
-            name="teams"
-            value={formData.teams}
-            onChange={handleChange}
-          >
-            {teams.map(team => (
-              <option key={team} value={team}>{team}</option>
-            ))}
-          </select>
-          
-          <button type="submit" className="create-button">Create Driver</button>
-          <Link to="/home" className="back-button">Back</Link>
+        <form className="formContainer">
+          <div className="formRow">
+            <div className="column">
+              <label className="form-label">FORENAME</label>
+              <input
+                onChange={handleChange}
+                name="forename"
+                type="text"
+                className="form-text"
+                value={driverData.forename}
+              />
+              {errors.forename && <label className="form-label">{errors.forename}</label>}
+            </div>
+            <div className="column">
+              <label className="form-label">SURNAME</label>
+              <input
+                onChange={handleChange}
+                name="surname"
+                type="text"
+                className="form-text"
+                value={driverData.surname}
+              />
+              {errors.surname && <label className="form-label">{errors.surname}</label>}
+            </div>
+          </div>
+          <div className="formRow">
+            <div className="column">
+              <label className="form-label">NATIONALITY</label>
+              <input
+                onChange={handleChange}
+                name="nationality"
+                type="text"
+                className="form-text"
+                value={driverData.nationality}
+              />
+              {errors.nationality && <label className="form-label">{errors.nationality}</label>}
+            </div>
+            <div className="column">
+              <label className="form-label">IMAGE</label>
+              <input
+                onChange={handleChange}
+                name="image"
+                type="text"
+                className="form-text"
+                value={driverData.image}
+              />
+              {errors.image && <label className="form-label">{errors.image}</label>}
+            </div>
+          </div>
+          <div className="formRow">
+            <div className="column">
+              <label className="form-label">DATE OF BIRTH</label>
+              <input
+                onChange={handleChange}
+                name="dob"
+                type="date"
+                className="form-text"
+                value={driverData.dob}
+              />
+              {errors.dob && <label className="form-label">{errors.dob}</label>}
+            </div>
+            <div className="column">
+              <label className="form-label">TEAMS</label>
+              <select
+                onChange={handleChange}
+                name="teams"
+                className="form-text"
+                value={driverData.teams}
+              >
+                <option value="Escuderías">ALL TEAMS</option>
+                {teamOptions.map((team, index) => (
+                  <option key={index} value={team}>
+                    {team}
+                  </option>
+                ))}
+              </select>
+              <div className="teamContainer">
+                {driverData.teams.map((team, index) => (
+                  <div key={index}>
+                    <p>{team}</p>
+                    <button onClick={handleRemove(team)} className="back-button">
+                      X
+                    </button>
+                  </div>
+                ))}
+                {errors.teams && <label className="form-label">{errors.teams}</label>}
+              </div>
+            </div>
+          </div>
+          <div className="column">
+            <label className="form-label">DESCRIPTION</label>
+            <textarea
+              onChange={handleChange}
+              name="description"
+              className="form-text description-textarea"
+              value={driverData.description}
+            />
+            {errors.description && <label className="form-label">{errors.description}</label>}
+          </div>
         </form>
       </div>
     </div>
   );
 };
 
-export default FormPage;
+export default Formpage;

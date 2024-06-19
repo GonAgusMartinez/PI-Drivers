@@ -1,28 +1,31 @@
 import React, { useState } from 'react';
-import '../Searchbar/Searchbar.css';
+import './SearchBar.css';
 
-const SearchBar = ({ onSearch, onFilter, onSort }) => {
+const SearchBar = ({ onSearch, onFilterChange, onSortChange }) => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [temperamentFilter, setTemperamentFilter] = useState('');
+  const [teamFilter, setTeamFilter] = useState('');
   const [originFilter, setOriginFilter] = useState('');
   const [sortBy, setSortBy] = useState('');
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
+    onSearch(event.target.value);
   };
 
-  const handleTemperamentFilterChange = (event) => {
-    setTemperamentFilter(event.target.value);
+  const handleTeamFilterChange = (event) => {
+    setTeamFilter(event.target.value);
+    onFilterChange('team', event.target.value);
   };
 
   const handleOriginFilterChange = (event) => {
     setOriginFilter(event.target.value);
+    onFilterChange('origin', event.target.value);
   };
 
   const handleSortChange = (event) => {
     setSortBy(event.target.value);
+    onSortChange(event.target.value);
   };
-
 
   return (
     <div className="searchbar-container">
@@ -36,18 +39,20 @@ const SearchBar = ({ onSearch, onFilter, onSort }) => {
       <div className="filters-container">
         <select
           className="filter-button"
-          value={temperamentFilter}
-          onChange={handleTemperamentFilterChange}
+          value={teamFilter}
+          onChange={handleTeamFilterChange}
         >
-          <option value="">Teams</option>
-          
+          <option value="">Filter by Team</option>
+          <option value="team1">Team 1</option>
+          <option value="team2">Team 2</option>
         </select>
         <select
           className="filter-button"
           value={originFilter}
           onChange={handleOriginFilterChange}
         >
-          <option value="standar">Standar</option>
+          <option value="">Filter by Origin</option>
+          <option value="api">From API</option>
           <option value="created">Created</option>
         </select>
         <select
@@ -55,8 +60,11 @@ const SearchBar = ({ onSearch, onFilter, onSort }) => {
           value={sortBy}
           onChange={handleSortChange}
         >
-          <option value="alphabetical">Alphabetical</option>
-          <option value="birthdate">Birthdate</option>
+          <option value="">Sort By</option>
+          <option value="alphabetical_asc">Alphabetical (A-Z)</option>
+          <option value="alphabetical_desc">Alphabetical (Z-A)</option>
+          <option value="birthdate_asc">Birthdate (Oldest first)</option>
+          <option value="birthdate_desc">Birthdate (Newest first)</option>
         </select>
       </div>
     </div>

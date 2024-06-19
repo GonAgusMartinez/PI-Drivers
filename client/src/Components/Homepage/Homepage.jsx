@@ -1,63 +1,112 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import SearchBar from '../Searchbar/Searchbar';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchDrivers } from '../../actions';
+import SearchBar from '../SearchBar/SearchBar';
 import Card from '../Cards/Cards';
-import Paginado from '../Paginado/Paginado';
 import Loader from '../Loader/Loader';
-import '../Homepage/Homepage.css';
-import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Paginado from '../Paginado/Paginado';
+import './Homepage.css';
 
 const Homepage = () => {
-  const [drivers, setDrivers] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [driversPerPage] = useState(9);
   const [searchTerm, setSearchTerm] = useState('');
-  const [filteredDrivers, setFilteredDrivers] = useState([]);
+  const [teamFilter, setTeamFilter] = useState('');
+  const [originFilter, setOriginFilter] = useState('');
+  const [sortBy, setSortBy] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const driversPerPage = 9;
 
   const dispatch = useDispatch();
+  const drivers = useSelector((state) => state.drivers);
+  const loading = useSelector((state) => state.loading);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('http://localhost:5000/drivers');
-        dispatch({ type: 'SET_DRIVERS', payload: response.data });
-        setFilteredDrivers(response.data);
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching drivers:', error);
-      }
-    };
-  
-    fetchData();
+    dispatch(fetchDrivers());
   }, [dispatch]);
 
-  useEffect(() => {
-    const filtered = drivers.filter(driver => 
-      (driver.name.forename + ' ' + driver.name.surname).toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setFilteredDrivers(filtered);
-  }, [searchTerm, drivers]);
+  // Función para aplicar filtros y ordenamiento
+  const applyFiltersAndSort = () => {
+    if (!drivers) return []; // Manejar el caso donde drivers es undefined
 
+    let filteredDrivers = drivers.filter((driver) =>
+      `${driver.name.forename} ${driver.name.surname}`.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    // Aplicar filtro por equipo si está seleccionado
+    if (teamFilter) {
+      filteredDrivers = filteredDrivers.filter((driver) =>
+        driver.teams.includes(teamFilter)
+      );
+    }
+
+    // Aplicar filtro por origen si está seleccionado
+    if (originFilter === 'api') {
+      filteredDrivers = filteredDrivers.filter((driver) => !driver.created);
+    } else if (originFilter === 'created') {
+      filteredDrivers = filteredDrivers.filter((driver) => driver.created);
+    }
+
+    // Aplicar ordenamiento si está seleccionado
+    if (sortBy === 'alphabetical_asc') {
+      filteredDrivers.sort((a, b) =>
+        `${a.name.forename} ${a.name.surname}`.localeCompare(`${b.name.forename} ${b.name.surname}`)
+      );
+    } else if (sortBy === 'alphabetical_desc') {
+      filteredDrivers.sort((a, b) =>
+        `${b.name.forename} ${b.name.surname}`.localeCompare(`${a.name.forename} ${a.name.surname}`)
+      );
+    } else if (sortBy === 'birthdate_asc') {
+      filteredDrivers.sort((a, b) => new Date(a.dob) - new Date(b.dob));
+    } else if (sortBy === 'birthdate_desc') {
+      filteredDrivers.sort((a, b) => new Date(b.dob) - new Date(a.dob));
+    }
+
+    return filteredDrivers;
+  };
+
+  const handleSearch = (term) => {
+    setSearchTerm(term);
+    setCurrentPage(1); // Resetear página actual al buscar
+  };
+
+  const handleFilterChange = (type, value) => {
+    if (type === 'team') {
+      setTeamFilter(value);
+    } else if (type === 'origin') {
+      setOriginFilter(value);
+    }
+    setCurrentPage(1); // Resetear página actual al aplicar filtro
+  };
+
+  const handleSortChange = (sort) => {
+    setSortBy(sort);
+    setCurrentPage(1); // Resetear página actual al cambiar el ordenamiento
+  };
+
+  const filteredDrivers = applyFiltersAndSort();
+
+  // Lógica de paginación
   const indexOfLastDriver = currentPage * driversPerPage;
   const indexOfFirstDriver = indexOfLastDriver - driversPerPage;
   const currentDrivers = filteredDrivers.slice(indexOfFirstDriver, indexOfLastDriver);
 
+  // Función para cambiar de página
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div className="homepage-container">
       <h1 className="homepage-title">DriversCup</h1>
-      <div className="title-space"></div>
-      <SearchBar onSearch={setSearchTerm} />
-      <div className="searchbar-space"></div>
+      <SearchBar
+        onSearch={handleSearch}
+        onFilterChange={handleFilterChange}
+        onSortChange={handleSortChange}
+      />
       {loading ? (
         <Loader />
       ) : (
         <>
           <div className="cards-container">
-            {currentDrivers.map(driver => (
+            {currentDrivers.map((driver) => (
               <Card
                 key={driver.id}
                 id={driver.id}
@@ -67,8 +116,7 @@ const Homepage = () => {
               />
             ))}
           </div>
-          <div className="cards-paginado-space"></div>
-          <div className="paginado-container">
+          <div className="pagination">
             <Paginado
               driversPerPage={driversPerPage}
               totalDrivers={filteredDrivers.length}
@@ -76,7 +124,6 @@ const Homepage = () => {
               currentPage={currentPage}
             />
           </div>
-          <div className="paginado-buttons-space"></div>
           <div className="buttons-container">
             <Link to="/form" className="button-link">
               Go to Create
