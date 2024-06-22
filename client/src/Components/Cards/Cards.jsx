@@ -3,21 +3,16 @@ import { Link } from 'react-router-dom';
 import '../Cards/Cards.css';
 import DefaultImage from '../Cards/Autito.jpg';
 
-const Card = ({ id, name, image, teams }) => {
+const Card = ({ id, name, image, teams, description }) => {
   if (!name || !teams) {
     return null;
   }
 
-  let fullName;
-  if (name.forename && name.surname) {
-    fullName = `${name.forename} ${name.surname}`;
-  } else {
-    fullName = `${name}`;
-  }
+  const fullName = name.forename && name.surname ? `${name.forename} ${name.surname}` : name.forename || name.surname || 'Unknown';
 
   const teamsString = Array.isArray(teams) ? teams.join(', ') : teams;
 
-  let imageUrl = image && image.url ? image.url : DefaultImage;
+  const imageUrl = image && image.url ? image.url : DefaultImage;
 
   return (
     <div className="card">
@@ -25,6 +20,7 @@ const Card = ({ id, name, image, teams }) => {
       <div className="card-content">
         <h3 className="card-name">{fullName}</h3>
         <p className="card-teams">Teams: {teamsString}</p>
+        {description && <p className="card-description">{description}</p>}
         <Link to={`/drivers/${id}`} className="enter-button">View Details</Link>
       </div>
     </div>

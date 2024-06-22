@@ -1,5 +1,5 @@
 const initialState = {
-  drivers: [],
+  drivers: [], 
   driverDetail: null,
   teams: [],
   loading: false,

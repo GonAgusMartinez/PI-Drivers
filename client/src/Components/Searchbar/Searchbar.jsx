@@ -8,23 +8,27 @@ const SearchBar = ({ onSearch, onFilterChange, onSortChange }) => {
   const [sortBy, setSortBy] = useState('');
 
   const handleSearchChange = (event) => {
-    setSearchTerm(event.target.value);
-    onSearch(event.target.value);
+    const value = event.target.value;
+    setSearchTerm(value);
+    onSearch(value);
   };
 
   const handleTeamFilterChange = (event) => {
-    setTeamFilter(event.target.value);
-    onFilterChange('team', event.target.value);
+    const value = event.target.value;
+    setTeamFilter(value);
+    onFilterChange('team', value);
   };
 
   const handleOriginFilterChange = (event) => {
-    setOriginFilter(event.target.value);
-    onFilterChange('origin', event.target.value);
+    const value = event.target.value;
+    setOriginFilter(value);
+    onFilterChange('origin', value);
   };
 
   const handleSortChange = (event) => {
-    setSortBy(event.target.value);
-    onSortChange(event.target.value);
+    const value = event.target.value;
+    setSortBy(value);
+    onSortChange(value);
   };
 
   return (
@@ -43,8 +47,14 @@ const SearchBar = ({ onSearch, onFilterChange, onSortChange }) => {
           onChange={handleTeamFilterChange}
         >
           <option value="">Filter by Team</option>
-          <option value="team1">Team 1</option>
-          <option value="team2">Team 2</option>
+          <option value="Red Bull">Red Bull</option>
+          <option value="Mercedes">Mercedes</option>
+          <option value="Ferrari">Ferrari</option>
+          <option value="McLaren">McLaren</option>
+          <option value="Aston Martin">Aston Martin</option>
+          <option value="Alpine">Alpine</option>
+          <option value="Williams Stake">Williams Stake</option>
+          <option value="Haas">Haas</option>
         </select>
         <select
           className="filter-button"

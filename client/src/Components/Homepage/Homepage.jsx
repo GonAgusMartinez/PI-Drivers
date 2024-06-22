@@ -13,40 +13,41 @@ const Homepage = () => {
   const [teamFilter, setTeamFilter] = useState('');
   const [originFilter, setOriginFilter] = useState('');
   const [sortBy, setSortBy] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
-  const driversPerPage = 9;
+  const [currentPage, setCurrentPage] = useState(1); // Estado para controlar la página actual
+  const driversPerPage = 9; // Conductores por página
 
   const dispatch = useDispatch();
-  const drivers = useSelector((state) => state.drivers);
-  const loading = useSelector((state) => state.loading);
+  const drivers = useSelector((state) => state.driverState.drivers); // Ajusta el selector según tu estado
+  const loading = useSelector((state) => state.driverState.loading); // Ajusta el selector según tu estado
 
   useEffect(() => {
+    console.log('Fetching drivers...');
     dispatch(fetchDrivers());
   }, [dispatch]);
 
-  // Función para aplicar filtros y ordenamiento
+  useEffect(() => {
+    console.log('Drivers:', drivers);
+  }, [drivers]);
+
   const applyFiltersAndSort = () => {
-    if (!drivers) return []; // Manejar el caso donde drivers es undefined
+    if (!drivers) return [];
 
     let filteredDrivers = drivers.filter((driver) =>
       `${driver.name.forename} ${driver.name.surname}`.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    // Aplicar filtro por equipo si está seleccionado
     if (teamFilter) {
       filteredDrivers = filteredDrivers.filter((driver) =>
         driver.teams.includes(teamFilter)
       );
     }
 
-    // Aplicar filtro por origen si está seleccionado
     if (originFilter === 'api') {
       filteredDrivers = filteredDrivers.filter((driver) => !driver.created);
     } else if (originFilter === 'created') {
       filteredDrivers = filteredDrivers.filter((driver) => driver.created);
     }
 
-    // Aplicar ordenamiento si está seleccionado
     if (sortBy === 'alphabetical_asc') {
       filteredDrivers.sort((a, b) =>
         `${a.name.forename} ${a.name.surname}`.localeCompare(`${b.name.forename} ${b.name.surname}`)
@@ -66,7 +67,7 @@ const Homepage = () => {
 
   const handleSearch = (term) => {
     setSearchTerm(term);
-    setCurrentPage(1); // Resetear página actual al buscar
+    setCurrentPage(1);
   };
 
   const handleFilterChange = (type, value) => {
@@ -75,22 +76,20 @@ const Homepage = () => {
     } else if (type === 'origin') {
       setOriginFilter(value);
     }
-    setCurrentPage(1); // Resetear página actual al aplicar filtro
+    setCurrentPage(1);
   };
 
   const handleSortChange = (sort) => {
     setSortBy(sort);
-    setCurrentPage(1); // Resetear página actual al cambiar el ordenamiento
+    setCurrentPage(1);
   };
 
   const filteredDrivers = applyFiltersAndSort();
 
-  // Lógica de paginación
   const indexOfLastDriver = currentPage * driversPerPage;
   const indexOfFirstDriver = indexOfLastDriver - driversPerPage;
   const currentDrivers = filteredDrivers.slice(indexOfFirstDriver, indexOfLastDriver);
 
-  // Función para cambiar de página
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (

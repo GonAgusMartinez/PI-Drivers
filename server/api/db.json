@@ -9590,14 +9590,23 @@
       "description": "Lance Graf von Haugwitz-Hardenberg-Reventlow,[1] (February 24, 1936 – July 24, 1972) was a British-born American entrepreneur, racing driver and heir to the Woolworth fortune. Reventlow was the only child of heiress Barbara Hutton and her second husband, Count Kurt Haugwitz-Hardenberg-Reventlow. His stepfathers included actor Cary Grant and Prince Igor Troubetzkoy."
     },
     {
-      "forename": "Max",
-      "surname": "Verstappen",
+      "id": 509,
+      "driverRef": "max_verstappen",
+      "number": null,
+      "code": "MAX",
+      "name": {
+        "forename": "Max",
+        "surname": "Verstappen"
+      },
+      "image": {
+        "url": "https://icdn.planb.mx/uploads/2023/06/max-verstappen-of-netherland-and-oracle-red-bull-racing-news-photo-1685122166-scaled.jpg?strip=all&lossy=1&ssl=1",
+        "imageby": ""
+      },
+      "dob": "1997-11-30",
       "nationality": "Belgium",
-      "dob": "1997-09-30",
-      "description": "He is a great runner and a great guy.",
-      "image": "https://media.tycsports.com/files/2021/12/08/369352/max-verstappen_862x485.jpg?v=3",
+      "url": "",
       "teams": "Red Bull",
-      "id": 509
+      "description": "He is a great driver and a good guy"
     }
   ]
 }

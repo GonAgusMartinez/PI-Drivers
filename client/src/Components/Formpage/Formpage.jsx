@@ -22,7 +22,6 @@ const Formpage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // No se necesita fetchTeams() si ya tenemos las opciones de equipo predefinidas
   }, []);
 
   const [driverData, setDriverData] = useState({
@@ -44,6 +43,8 @@ const Formpage = () => {
     image: "",
     teams: "",
   });
+
+  const [lastId, setLastId] = useState(508);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -92,26 +93,40 @@ const Formpage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validate all fields before submitting
     const formErrors = validation(driverData);
     setErrors(formErrors);
 
-    // Check if there are any errors
     const hasErrors = Object.keys(formErrors).some((key) => formErrors[key] !== "");
     if (hasErrors) {
       alert("Please fill out the form correctly");
       return;
     }
 
-    // Form data is valid, proceed to submit
-    const teamsAsString = driverData.teams.join(", ");
-    const formWithTeamsAsString = {
-      ...driverData,
-      teams: teamsAsString,
+    const newId = lastId + 1;
+
+    const transformedData = {
+      id: newId, 
+      driverRef: `${driverData.forename.toLowerCase()}_${driverData.surname.toLowerCase()}`, 
+      number: null, 
+      code: driverData.forename.slice(0, 3).toUpperCase(), 
+      name: {
+        forename: driverData.forename,
+        surname: driverData.surname,
+      },
+      image: {
+        url: driverData.image,
+        imageby: "", 
+      },
+      dob: driverData.dob,
+      nationality: driverData.nationality,
+      url: "", 
+      teams: driverData.teams.join(", "), 
+      description: driverData.description,
     };
 
     try {
-      await dispatch(postDriver(formWithTeamsAsString));
+      await dispatch(postDriver(transformedData));
+      setLastId(newId + 1); 
       alert("Driver created successfully");
       navigate("/home");
     } catch (error) {
