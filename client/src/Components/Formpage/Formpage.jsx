@@ -21,8 +21,7 @@ const Formpage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useEffect(() => {
-  }, []);
+  useEffect(() => {}, []);
 
   const [driverData, setDriverData] = useState({
     forename: "",
@@ -43,8 +42,6 @@ const Formpage = () => {
     image: "",
     teams: "",
   });
-
-  const [lastId, setLastId] = useState(508);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -90,6 +87,10 @@ const Formpage = () => {
     return hasErrors;
   };
 
+  const generateRandomId = (min = 510, max = 10000) => {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -102,31 +103,30 @@ const Formpage = () => {
       return;
     }
 
-    const newId = lastId + 1;
+    const newId = generateRandomId();
 
     const transformedData = {
-      id: newId, 
-      driverRef: `${driverData.forename.toLowerCase()}_${driverData.surname.toLowerCase()}`, 
-      number: null, 
-      code: driverData.forename.slice(0, 3).toUpperCase(), 
+      id: newId,
+      driverRef: `${driverData.forename.toLowerCase()}_${driverData.surname.toLowerCase()}`,
+      number: null,
+      code: driverData.forename.slice(0, 3).toUpperCase(),
       name: {
         forename: driverData.forename,
         surname: driverData.surname,
       },
       image: {
         url: driverData.image,
-        imageby: "", 
+        imageby: "",
       },
       dob: driverData.dob,
       nationality: driverData.nationality,
-      url: "", 
-      teams: driverData.teams.join(", "), 
+      url: "",
+      teams: driverData.teams.join(", "),
       description: driverData.description,
     };
 
     try {
       await dispatch(postDriver(transformedData));
-      setLastId(newId + 1); 
       alert("Driver created successfully");
       navigate("/home");
     } catch (error) {

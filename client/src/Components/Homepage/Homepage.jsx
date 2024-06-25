@@ -13,12 +13,12 @@ const Homepage = () => {
   const [teamFilter, setTeamFilter] = useState('');
   const [originFilter, setOriginFilter] = useState('');
   const [sortBy, setSortBy] = useState('');
-  const [currentPage, setCurrentPage] = useState(1); // Estado para controlar la página actual
-  const driversPerPage = 9; // Conductores por página
+  const [currentPage, setCurrentPage] = useState(1);
+  const driversPerPage = 9;
 
   const dispatch = useDispatch();
-  const drivers = useSelector((state) => state.driverState.drivers); // Ajusta el selector según tu estado
-  const loading = useSelector((state) => state.driverState.loading); // Ajusta el selector según tu estado
+  const drivers = useSelector((state) => state.driverState.drivers);
+  const loading = useSelector((state) => state.driverState.loading);
 
   useEffect(() => {
     console.log('Fetching drivers...');
@@ -43,9 +43,13 @@ const Homepage = () => {
     }
 
     if (originFilter === 'api') {
-      filteredDrivers = filteredDrivers.filter((driver) => !driver.created);
+      filteredDrivers = filteredDrivers.filter((driver) =>
+        driver.id <= 508
+      );
     } else if (originFilter === 'created') {
-      filteredDrivers = filteredDrivers.filter((driver) => driver.created);
+      filteredDrivers = filteredDrivers.filter((driver) =>
+        driver.id >= 509
+      );
     }
 
     if (sortBy === 'alphabetical_asc') {
@@ -73,8 +77,10 @@ const Homepage = () => {
   const handleFilterChange = (type, value) => {
     if (type === 'team') {
       setTeamFilter(value);
+      console.log('Team Filter in Homepage:', value); 
     } else if (type === 'origin') {
       setOriginFilter(value);
+      console.log('Origin Filter in Homepage:', value); 
     }
     setCurrentPage(1);
   };

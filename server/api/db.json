@@ -9607,6 +9607,25 @@
       "url": "",
       "teams": "Red Bull",
       "description": "He is a great driver and a good guy"
+    },
+    {
+      "id": 7412,
+      "driverRef": "ayrton_senna",
+      "number": null,
+      "code": "AYR",
+      "name": {
+        "forename": "Ayrton",
+        "surname": "Senna"
+      },
+      "image": {
+        "url": "https://hips.hearstapps.com/hmg-prod/images/gettyimages-600969539-1584256651.jpg?crop=1.00xw:0.698xh;0,0.0317xh&resize=1200:*",
+        "imageby": ""
+      },
+      "dob": "1970-03-21",
+      "nationality": "Brasil",
+      "url": "",
+      "teams": "McLaren",
+      "description": "He was a incredible driver and multi-championship winner but he died on car accident in 1994"
     }
   ]
 }
