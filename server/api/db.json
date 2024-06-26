@@ -9626,6 +9626,25 @@
       "url": "",
       "teams": "McLaren",
       "description": "He was a incredible driver and multi-championship winner but he died on car accident in 1994"
+    },
+    {
+      "id": 6566,
+      "driverRef": "gonzalo_martinez",
+      "number": null,
+      "code": "GON",
+      "name": {
+        "forename": "Gonzalo",
+        "surname": "Martinez"
+      },
+      "image": {
+        "url": "https://edasi.com/cdn/shop/articles/Esteban-1-777x437_900x.jpg?v=1633103411",
+        "imageby": ""
+      },
+      "dob": "2002-07-07",
+      "nationality": "Argentinian",
+      "url": "",
+      "teams": "Williams Stake, Aston Martin",
+      "description": "He is a beginner driver and he try to win the next world championship"
     }
   ]
 }

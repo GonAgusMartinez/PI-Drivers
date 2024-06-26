@@ -16,13 +16,13 @@ const SearchBar = ({ onSearch, onFilterChange, onSortChange }) => {
   const handleTeamFilterChange = (event) => {
     const value = event.target.value;
     setTeamFilter(value);
-    onFilterChange({ teams: value, origin: originFilter });
+    onFilterChange('team', value); 
   };
 
   const handleOriginFilterChange = (event) => {
     const value = event.target.value;
     setOriginFilter(value);
-    onFilterChange({ id: teamFilter, origin: value });
+    onFilterChange('origin', value); 
   };
 
   const handleSortChange = (event) => {

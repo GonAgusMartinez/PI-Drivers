@@ -45,18 +45,18 @@ const Formpage = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
+  
     if (name === "teams") {
       if (value === "Escuderías") {
         return;
       }
-
+  
       if (!driverData.teams.includes(value) && driverData.teams.length < 2) {
         setDriverData((prevState) => ({
           ...prevState,
           teams: [...prevState.teams, value],
         }));
-        setErrors(validation({ ...driverData, teams: [...driverData.teams, value] }));
+        setErrors(validation({ ...driverData, teams: [...driverData.teams, value].join(", ") }));
       }
     } else {
       setDriverData({
@@ -66,14 +66,14 @@ const Formpage = () => {
       setErrors(validation({ ...driverData, [name]: value }));
     }
   };
-
+  
   const handleRemove = (team) => (e) => {
     e.preventDefault();
     setDriverData((prevState) => ({
       ...prevState,
       teams: prevState.teams.filter((escuderia) => escuderia !== team),
     }));
-    setErrors(validation({ ...driverData, teams: driverData.teams.filter((escuderia) => escuderia !== team) }));
+    setErrors(validation({ ...driverData, teams: driverData.teams.filter((escuderia) => escuderia !== team).join(", ") }));
   };
 
   const handleDisable = () => {
@@ -222,15 +222,15 @@ const Formpage = () => {
                 onChange={handleChange}
                 name="teams"
                 className="form-text"
-                value={driverData.teams}
-              >
-                <option value="Escuderías">ALL TEAMS</option>
-                {teamOptions.map((team, index) => (
-                  <option key={index} value={team}>
-                    {team}
-                  </option>
-                ))}
-              </select>
+                value={driverData.teams.join(", ")} 
+               >
+            <option value="Escuderías">ALL TEAMS</option>
+             {teamOptions.map((team, index) => (
+            <option key={index} value={team}>
+             {team}
+           </option>
+              ))}
+            </select>
               <div className="teamContainer">
                 {driverData.teams.map((team, index) => (
                   <div key={index}>

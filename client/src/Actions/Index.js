@@ -7,9 +7,7 @@ export const setDrivers = (drivers) => ({
 
 export const fetchDrivers = () => async (dispatch) => {
   try {
-    console.log('Fetching drivers...');
     const response = await axios.get('http://localhost:5000/drivers');
-    console.log('Response:', response.data); 
     dispatch(setDrivers(response.data));
   } catch (error) {
     console.error('Error fetching drivers:', error);

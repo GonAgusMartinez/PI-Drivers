@@ -21,12 +21,10 @@ const Homepage = () => {
   const loading = useSelector((state) => state.driverState.loading);
 
   useEffect(() => {
-    console.log('Fetching drivers...');
     dispatch(fetchDrivers());
   }, [dispatch]);
 
   useEffect(() => {
-    console.log('Drivers:', drivers);
   }, [drivers]);
 
   const applyFiltersAndSort = () => {
@@ -38,7 +36,7 @@ const Homepage = () => {
 
     if (teamFilter) {
       filteredDrivers = filteredDrivers.filter((driver) =>
-        driver.teams.includes(teamFilter)
+        driver.teams && driver.teams.includes(teamFilter) 
       );
     }
 
@@ -77,10 +75,8 @@ const Homepage = () => {
   const handleFilterChange = (type, value) => {
     if (type === 'team') {
       setTeamFilter(value);
-      console.log('Team Filter in Homepage:', value); 
     } else if (type === 'origin') {
       setOriginFilter(value);
-      console.log('Origin Filter in Homepage:', value); 
     }
     setCurrentPage(1);
   };

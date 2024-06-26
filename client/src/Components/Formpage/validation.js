@@ -30,7 +30,7 @@ const validation = (input) => {
   }
 
   if (!input.teams || input.teams.length === 0 || input.teams.length > 3) {
-    errors.teams = "You must select 1 to 3 teams";
+    errors.teams = "You must select 1 to 2 teams";
   } else {
     const allowedTeams = ["Red Bull", "Mercedes", "Ferrari", "McLaren", "Aston Martin", "Alphine", "Williams Stake", "Haas"];
     const invalidTeams = input.teams.filter(team => !allowedTeams.includes(team));
