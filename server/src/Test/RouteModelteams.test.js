@@ -1,32 +1,30 @@
-const { DataTypes } = require('sequelize');
+const request = require('supertest');
 const sequelize = require('../db');
-const TeamsModel = require('../models/Teams');
+const server = require('../server');
+const { Driver, Teams } = sequelize.models;
 
 describe('Teams Model', () => {
-  // Define una instancia del modelo en la base de datos
-  const Teams = TeamsModel(sequelize);
-
-  // Asegura que el modelo esté sincronizado con la base de datos
   beforeAll(async () => {
     await sequelize.sync({ force: true });
   });
 
-  // Test para crear un nuevo equipo
+  afterAll(async () => {
+    await sequelize.close();
+  });
+
   it('should create a new team', async () => {
     const newTeam = await Teams.create({
-      nombre: 'Mercedes',
+      nombre: 'Mercedes AMG',
     });
 
     expect(newTeam.id).toBeDefined();
-    expect(newTeam.nombre).toBe('Mercedes');
+    expect(newTeam.nombre).toBe('Mercedes AMG');
   });
 
-  // Test para validar campo requerido
-  it('should not allow null value for required field', async () => {
+  it('should not allow null values for required fields', async () => {
     let err;
 
     try {
-      // Intenta crear un equipo sin nombre
       await Teams.create({});
     } catch (error) {
       err = error;
